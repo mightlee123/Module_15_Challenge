@@ -125,8 +125,34 @@ def recommend_portfolio(intent_request):
     source = intent_request["invocationSource"]
 
     # YOUR CODE GOES HERE!
+    if age>0 and age<65:
+        if investment_amount >= 5000:
+            return fetch_recommendation(risk_level)
+        else:
+            return build_validation_result(
+                False,
+                "investmentAmount",
+                "The ammount you've entered is too low, "
+                "please enter a sufficient amount.",
+            )
+    else:
+        return build_validation_result(
+                False,
+                "age",
+                "The age is invalid, "
+                "please provide a correct age.",
+            )
 
-
+def fetch_recommendation(risk_level):
+    recommendation_dic= {
+        "none": "100% bonds (AGG), 0% equities (SPY)",
+        "very low": "80% bonds (AGG), 20% equities (SPY)",
+        "low": "60% bonds (AGG), 40% equities (SPY)",
+        "medium": "40% bonds (AGG), 60% equities (SPY)",
+        "high": "20% bonds (AGG), 80% equities (SPY)",
+        "very high": "0% bonds (AGG), 100% equities (SPY)",
+    }
+    return recommendation_dic[risk_level]
 ### Intents Dispatcher ###
 def dispatch(intent_request):
     """
