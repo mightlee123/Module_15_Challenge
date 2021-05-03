@@ -1,0 +1,8 @@
+graph LR
+    Start(start) --> User[\Client/]
+    User[\Client/] -.-> |provides personal financial information| Profiler[profiler];
+    subgraph profiler
+    Profiler --> Decision{sufficient <br> funds?}; 
+    end
+    Decision --> |yes| Calculator[[calculator]];
+    Decision --> |no| End(end);

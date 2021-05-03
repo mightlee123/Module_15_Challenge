@@ -1,0 +1,12 @@
+flowchart TD
+    Start(start) --> Client[\Client/];
+    Client --> |get_info| Qualification[[qualification]] 
+    subgraph profiler
+        Qualification --> Decision{sufficient <br> funds?};
+        Decision --> |yes| Risk_Profile[[risk_profile]];
+        Risk_Profile --> Risk{risk profile};
+    end
+    Risk -.-> |conservative|Calculator[[calculator]];
+    Risk -.-> |moderate| Calculator;
+    Risk -.-> |aggressive| Calculator;
+    Decision --> |no| End(end)

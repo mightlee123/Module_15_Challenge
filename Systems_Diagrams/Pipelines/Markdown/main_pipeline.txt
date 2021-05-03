@@ -1,0 +1,8 @@
+graph LR
+    User[\Client/] -.-> |provides personal financial information| Profiler[[profiler]];
+    subgraph Program
+    Profiler --> Calculator[[calculator]];
+    Calculator --> Visualizer[[visualizer]];
+    end
+    API[(API)] --> |provides up-to-date financial data| Calculator;
+    Visualizer -.-> |generates| Output[/output/];
